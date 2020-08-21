@@ -1,15 +1,15 @@
 import shipFactory from './shipFactory'
 
 test("Ship size", () => {
-    expect(shipFactory(5).length).toBe(5)
+    expect(shipFactory(5, "test").length).toBe(5)
 })
 
 test("Ship size test 2", () => {
-    expect(shipFactory(4).length).toBe(4)
+    expect(shipFactory(4, "test").length).toBe(4)
 })
 
 test("Hit to sunk", () => {
-    const ship = shipFactory(3)
+    const ship = shipFactory(3, "test")
     ship.hit(0)
     ship.hit(2)
     ship.hit(1)
@@ -17,14 +17,14 @@ test("Hit to sunk", () => {
 })
 
 test("Hit but not sunk", () => {
-    const ship = shipFactory(3)
+    const ship = shipFactory(3, "test")
     ship.hit(0)
     ship.hit(2)
     expect(ship.isSunk()).toBe(false)
 })
 
 test("Hit twice in one place; not sunk", () => {
-    const ship = shipFactory(3)
+    const ship = shipFactory(3, "test")
     ship.hit(0)
     ship.hit(0)
     ship.hit(2)
@@ -32,7 +32,7 @@ test("Hit twice in one place; not sunk", () => {
 })
 
 test("Hit twice in one place; sunk", () => {
-    const ship = shipFactory(3)
+    const ship = shipFactory(3, "test")
     ship.hit(0)
     ship.hit(0)
     ship.hit(1)
@@ -41,7 +41,7 @@ test("Hit twice in one place; sunk", () => {
 })
 
 test("Hit called with arg outside of ship length range; not sunk", () => {
-    const ship = shipFactory(3)
+    const ship = shipFactory(3, "test")
     ship.hit(6)
     ship.hit(0)
     ship.hit(2)
@@ -49,7 +49,7 @@ test("Hit called with arg outside of ship length range; not sunk", () => {
 })
 
 test("Hit called with arg outside of ship length range; sunk", () => {
-    const ship = shipFactory(3)
+    const ship = shipFactory(3, "test")
     ship.hit(4)
     ship.hit(0)
     ship.hit(1)
@@ -57,3 +57,7 @@ test("Hit called with arg outside of ship length range; sunk", () => {
     expect(ship.isSunk()).toBe(true)
 })
 
+test("With a name", () => {
+    const ship = shipFactory(3, "Battleship")
+    expect(ship.name).toBe("Battleship")
+})

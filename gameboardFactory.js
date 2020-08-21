@@ -1,17 +1,35 @@
 import shipFactory from './shipFactory'
 
 function gameboardFactory() {
-    const board = new Array(100)
+    const board = new Array(100).fill(null)
     const ships = []
-    const addShip = (length) => {
-        const ship = shipFactory(length)
+    const addShip = (length, name=ships.length) => {
+        const ship = shipFactory(length, name)
         ships.push(ship)
+        return ship
     }
-    const placeShip = (pos, ship) => { board[pos] = ship }
+    const placeShip = (token, positions) => { 
+        board.forEach((space, index) => {
+            if (space === token) board[index] = null
+        })
+        positions.forEach(pos => board[pos] = token)
+        return board
+    }
+    const receiveAttack = (position) => {
+        board[position] = board[position] === null ? "miss" : "hit"
+        return board
+    }
+    const allSunk = () => {
+        const isUnsunkValue = (val) => ![null, "hit", "miss"].includes(val)
+        return (
+            board.reduce((acc, cur) => acc && !isUnsunkValue(cur), true)
+        )
+    }
     return {
-        board,
         addShip,
-        placeShip
+        placeShip,
+        receiveAttack,
+        allSunk
     }
 }
 
