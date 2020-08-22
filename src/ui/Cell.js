@@ -34,7 +34,7 @@ const getCellStyle = (cell, whoseBoard) => {
                     return "red"
                     break
                 case "miss":
-                    return "grey"
+                    return "rgba(0, 0, 0, .35)"
                     break
                 default:
                     return "white"
@@ -47,7 +47,7 @@ const getCellStyle = (cell, whoseBoard) => {
                     return "red"
                     break
                 case "miss":
-                    return "grey"
+                    return "rgba(0, 0, 0, .35)"
                     break
                 default:
                     return "white"
