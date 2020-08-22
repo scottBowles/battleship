@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import style from "./Cell.css"
 
 function Cell (props) {
     const { value, whoseBoard, position, handleCellClick } = props
-    
+
     return (
-        <div onClick={() => handleCellClick(position, whoseBoard)} style={ getCellStyle(value, whoseBoard) }></div>
+        <div onClick={() => handleCellClick(position, whoseBoard)} style={ getCellStyle(value, whoseBoard) }>
+            <span className="overlay"></span>
+        </div>
     )
 }
 
