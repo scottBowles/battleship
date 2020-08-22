@@ -1,4 +1,4 @@
-import cpuFactory from "./cpuFactory"
+import cpuFactory from "./CPU"
 
 test("happy path", () => {
     const cpu = cpuFactory()

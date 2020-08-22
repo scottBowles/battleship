@@ -1,4 +1,4 @@
-import playerFactory from "./playerFactory"
+import playerFactory from "./Player"
 
 function cpuFactory() {
     const cpu = playerFactory("CPU")

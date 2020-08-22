@@ -1,4 +1,4 @@
-import shipFactory from './shipFactory'
+import shipFactory from './Ship'
 
 function gameboardFactory() {
     const board = new Array(100).fill(null)

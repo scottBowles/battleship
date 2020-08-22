@@ -1,6 +1,6 @@
-import gameboardFactory from "./gameboardFactory"
-import stdGameboardFactory from "./stdGameboardFactory"
-import preplacedGameboardFactory from "./preplacedGameboardFactory"
+import gameboardFactory from "./Gameboard"
+import stdGameboardFactory from "./StdGameboard"
+import preplacedGameboardFactory from "./PreplacedGameboard"
 
 const config = {
     gameboard: "standard"

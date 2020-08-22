@@ -1,4 +1,4 @@
-import shipFactory from './shipFactory'
+import shipFactory from './Ship'
 
 test("Ship size", () => {
     expect(shipFactory(5, "test").length).toBe(5)

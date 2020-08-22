@@ -1,4 +1,4 @@
-import gameboardFactory from './gameboardFactory'
+import gameboardFactory from './Gameboard'
 
 test("Place ship", () => {
     const gameboard = gameboardFactory()

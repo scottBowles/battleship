@@ -1,4 +1,4 @@
-import stdGameboardFactory from "./stdGameboardFactory"
+import stdGameboardFactory from "./StdGameboard"
 
 function preplacedGameboardFactory() {
     const board = stdGameboardFactory()

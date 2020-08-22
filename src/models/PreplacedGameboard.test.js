@@ -1,4 +1,4 @@
-import preplacedGameboardFactory from "./preplacedGameboardFactory"
+import preplacedGameboardFactory from "./PreplacedGameboard"
 
 test("happy path", () => {
     const gameboard = preplacedGameboardFactory()
