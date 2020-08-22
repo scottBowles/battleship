@@ -46,6 +46,12 @@ test("Receive hit", () => {
     expect(updatedBoard[3]).toBe("hit")
 })
 
+test("Attack in position already attacked", () => {
+    const gameboard = gameboardFactory()
+    gameboard.receiveAttack(3)
+    expect(gameboard.receiveAttack(3)).toBe("Position already attacked")
+})
+
 test("allSunk -- true", () => {
     const gameboard = gameboardFactory()
     const ship = gameboard.addShip(2, "Destroyer")

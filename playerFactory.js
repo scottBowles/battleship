@@ -12,7 +12,7 @@ function playerFactory(name, newGameboard=config.newGameboard) {
         allSunk,
         placeShip,
         resetGameboard
-        // may need gameboard for DOM
+        // may need gameboard for DOM; may be able to get it through already exposed functions
     }
 }
 

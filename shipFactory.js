@@ -1,7 +1,10 @@
 function shipFactory(length, name) {
-    const pips = new Array(length).fill(false)
-    const hit = (pos) => pips[pos] = true
-    const isSunk = () => pips.reduce((acc, cur) => acc && cur)
+    let unHitPips = length
+    const hit = () => {
+        unHitPips -= 1
+        return isSunk() ? "sunk" : false
+    }
+    const isSunk = () => unHitPips < 1
     return {
         length,
         name,

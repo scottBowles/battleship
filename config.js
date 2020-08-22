@@ -1,5 +1,6 @@
 import gameboardFactory from "./gameboardFactory"
 import stdGameboardFactory from "./stdGameboardFactory"
+import preplacedGameboardFactory from "./preplacedGameboardFactory"
 
 const config = {
     gameboard: "standard"
@@ -10,6 +11,8 @@ const configRouter = {
         ? gameboardFactory
         : config.gameboard === "standard"
         ? stdGameboardFactory
+        : config.gameboard === "preplaced"
+        ? preplacedGameboardFactory
         : stdGameboardFactory
 }
 

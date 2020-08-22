@@ -10,47 +10,22 @@ test("Ship size test 2", () => {
 
 test("Hit to sunk", () => {
     const ship = shipFactory(3, "test")
-    ship.hit(0)
-    ship.hit(2)
-    ship.hit(1)
+    ship.hit()
+    ship.hit()
+    ship.hit()
     expect(ship.isSunk()).toBe(true)
 })
 
 test("Hit but not sunk", () => {
     const ship = shipFactory(3, "test")
-    ship.hit(0)
-    ship.hit(2)
-    expect(ship.isSunk()).toBe(false)
-})
-
-test("Hit twice in one place; not sunk", () => {
-    const ship = shipFactory(3, "test")
-    ship.hit(0)
-    ship.hit(0)
-    ship.hit(2)
+    ship.hit()
+    ship.hit()
     expect(ship.isSunk()).toBe(false)
 })
 
 test("Hit twice in one place; sunk", () => {
     const ship = shipFactory(3, "test")
     ship.hit(0)
-    ship.hit(0)
-    ship.hit(1)
-    ship.hit(2)
-    expect(ship.isSunk()).toBe(true)
-})
-
-test("Hit called with arg outside of ship length range; not sunk", () => {
-    const ship = shipFactory(3, "test")
-    ship.hit(6)
-    ship.hit(0)
-    ship.hit(2)
-    expect(ship.isSunk()).toBe(false)
-})
-
-test("Hit called with arg outside of ship length range; sunk", () => {
-    const ship = shipFactory(3, "test")
-    ship.hit(4)
     ship.hit(0)
     ship.hit(1)
     ship.hit(2)
