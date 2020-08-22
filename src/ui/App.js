@@ -1,21 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Board from './Board'
 // import PlayerDisplay from './PlayerDisplay'
 
-import Player from "../models/Player"
-import CPU from "../models/CPU"
+function App(props) {
+    console.log('render App')
 
+    const { player, opponent } = props
 
-function App() {
-    const player = Player("Player")
-    const cpu = CPU()
+    const [playerBoard, setPlayerBoard] = useState(player.gameboard.board)
+    const [opponentBoard, setOpponentBoard] = useState(opponent.gameboard.board)
+
+    async function getAttackResult(position) {
+        const attackResult = await opponent.receiveAttack(position)
+        return attackResult
+    }
+
+    const handleCellClick = (position, whoseBoard) => {
+        if (whoseBoard === "Opponent"){
+            const attackResult = opponent.receiveAttack(position)
+            if (attackResult !== "Position already attacked") {
+                setOpponentBoard([...attackResult])
+            }
+        }
+    }
+
     return (
         <div style={{ textAlign: "center" }}>
             <h1>BATTLESHIP!</h1>
+            <p>{opponentBoard[0]}</p>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Board type="Player" gameboard={player.gameboard.board}/>
-                <Board type="Opponent" gameboard={cpu.gameboard.board} />
+                <Board whoseBoard="Player" gameboard={ playerBoard } handleCellClick={ handleCellClick } />
+                <Board whoseBoard="Opponent" gameboard={ opponentBoard } handleCellClick={ handleCellClick } />
             </div>
             {
             // <PlayerDisplay />
