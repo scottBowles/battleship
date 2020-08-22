@@ -1,7 +1,8 @@
 import config from "./config"
 
 function playerFactory(name, newGameboard=config.newGameboard) {
-    const gameboard = newGameboard()
+    let gameboard = newGameboard()
+    const changeName = (newName) => name = newName
     const allSunk = () => gameboard.allSunk()
     const receiveAttack = (pos) => gameboard.receiveAttack(pos)
     const placeShip = (token, pos) => gameboard.placeShip(token, pos)
@@ -11,7 +12,8 @@ function playerFactory(name, newGameboard=config.newGameboard) {
         receiveAttack,
         allSunk,
         placeShip,
-        resetGameboard
+        resetGameboard,
+        gameboard
         // may need gameboard for DOM; may be able to get it through already exposed functions
     }
 }

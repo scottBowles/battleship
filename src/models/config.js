@@ -3,7 +3,7 @@ import stdGameboardFactory from "./StdGameboard"
 import preplacedGameboardFactory from "./PreplacedGameboard"
 
 const config = {
-    gameboard: "standard"
+    gameboard: "preplaced"
 }
 
 const configRouter = {

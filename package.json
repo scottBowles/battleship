@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/scottBowles/battleship#readme",
   "devDependencies": {
+    "@babel/core": "^7.11.4",
     "parcel-bundler": "^1.12.4"
   },
   "dependencies": {

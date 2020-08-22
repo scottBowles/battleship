@@ -33,7 +33,7 @@ function gameboardFactory() {
         placeShip,
         receiveAttack,
         allSunk,
-        // may need board for dom
+        board
     }
 }
 
