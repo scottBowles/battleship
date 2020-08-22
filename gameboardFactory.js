@@ -29,7 +29,8 @@ function gameboardFactory() {
         addShip,
         placeShip,
         receiveAttack,
-        allSunk
+        allSunk,
+        // may need board for dom
     }
 }
 
