@@ -47,8 +47,8 @@ function App(props) {
         <div style={{ textAlign: "center" }}>
             <h1>BATTLESHIP!</h1>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Board whoseBoard="Player" gameboard={ playerBoard } handleCellClick={ handleCellClick } />
-                <Board whoseBoard="Opponent" gameboard={ opponentBoard } handleCellClick={ handleCellClick } />
+                <Board whoseBoard="Player" name={ player.name } gameboard={ playerBoard } handleCellClick={ handleCellClick } />
+                <Board whoseBoard="Opponent" name={ opponent.name } gameboard={ opponentBoard } handleCellClick={ handleCellClick } />
             </div>
             <PlayerDisplay handlePlaceShipsRandomly={ handlePlaceShipsRandomly } />
         </div>
