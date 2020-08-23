@@ -33,7 +33,8 @@ function gameboardFactory() {
         placeShip,
         receiveAttack,
         allSunk,
-        board
+        board,
+        ships
     }
 }
 

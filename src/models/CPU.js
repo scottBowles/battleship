@@ -1,9 +1,10 @@
 import playerFactory from "./Player"
 import config from "./config"
+import stdGameboardFactory from "./StdGameboard"
 
-function cpuFactory(name="CPU", newGameboard=config.newGameboard) {
+function cpuFactory(name="CPU", newGameboard=stdGameboardFactory) {
     const cpu = playerFactory(name, newGameboard)
-    const { board } = cpu.gameboard
+    const { board, ships } = cpu.gameboard
 
     cpu.getValidStartingPosition = (length, direction, board) => {
         const startingPosition = Math.floor(Math.random() * 100)
@@ -15,24 +16,33 @@ function cpuFactory(name="CPU", newGameboard=config.newGameboard) {
             }
     }
 
+    cpu.getValidPositions = (length, board) => {
+        const direction = Math.random() < .5 ? "horizontal" : "vertical"
+        const startingPosition = cpu.getValidStartingPosition(length, direction, board)
+        const positions = []
+        let isValid = true
+        for (let i = 0; i < length; i++) {
+            const newPosition = direction === "horizontal" 
+                ? startingPosition + i 
+                : startingPosition + (i * 10)
+            if (board[newPosition]) {
+                isValid = false
+            }
+            positions.push(newPosition)
+        }
+        if (!isValid) return cpu.getValidPositions(length, board)
+        return positions
+    }
+
     cpu.placeShipsRandomly = (ships) => {
         ships.forEach(ship => {
             const { length, name } = ship
-            const direction = Math.random() < .5 ? "horizontal" : "vertical"
-            const startingPosition = cpu.getValidStartingPosition(length, direction, board)
-            const positions = []
-            if (direction === "horizontal") {
-                for (let i = 0; i < length; i++) {
-                    positions.push(startingPosition + i)
-                }
-            } else if (direction === "vertical") {
-                for (let i = 0; i < length; i++) {
-                    positions.push(startingPosition + (i * 10))
-                }
-            }
+            const positions = cpu.getValidPositions(length, board)
             cpu.placeShip(name, positions)
         })
     }
+
+    cpu.placeShipsRandomly(ships)
 
     const opponentBoard = new Array(100).fill(null)
 
