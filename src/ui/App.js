@@ -8,14 +8,14 @@ function App(props) {
 
     const [playerBoard, setPlayerBoard] = useState(player.gameboard.board)
     const [opponentBoard, setOpponentBoard] = useState(opponent.gameboard.board)
-    const [playerTurn, setPlayerTurn] = useState("Player")
+    const [phase, setPhase] = useState("playerTurn")
 
     const playerAttack = (position) => {
         const playerAttackResult = opponent.receiveAttack(position)
         if (playerAttackResult === "Position already attacked") return false
         setOpponentBoard([...playerAttackResult])
         if (opponent.allSunk()) endGame(player)
-        setPlayerTurn("Opponent")
+        setPhase("opponentTurn")
         return true
     }
 
@@ -24,11 +24,11 @@ function App(props) {
         const opponentAttackResult = player.receiveAttack(attackedPosition)
         setPlayerBoard([...opponentAttackResult])
         if (player.allSunk()) endGame(opponent)
-        setPlayerTurn("Player")
+        setPhase("playerTurn")
     }
 
     const handleCellClick = (position, whoseBoard) => {
-        if (whoseBoard !== "Opponent" || playerTurn !== "Player") return
+        if (whoseBoard !== "Opponent" || phase !== "playerTurn") return
         const isValidPlay = playerAttack(position)   
         if (isValidPlay) {
             setTimeout(() => {
