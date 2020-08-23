@@ -19,3 +19,13 @@ function playerFactory(name, newGameboard=config.newGameboard) {
 }
 
 export default playerFactory
+
+
+
+const playerAttack = (position) => {
+    const playerAttackResult = opponent.receiveAttack(position)
+    if (playerAttackResult === "Position already attacked") return
+    setOpponentBoard([...playerAttackResult])
+    if (opponent.allSunk()) endGame(player)
+    setPlayerTurn("Opponent")
+}
