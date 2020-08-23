@@ -45,6 +45,7 @@ function playerFactory(name, newGameboard=config.newGameboard) {
             const positions = getValidPositions(length, board)
             placeShip(name, positions)
         })
+        return board
     }
     return {
         name,

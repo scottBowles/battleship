@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import Board from './Board'
-// import PlayerDisplay from './PlayerDisplay'
+import PlayerDisplay from './PlayerDisplay'
 
 function App(props) {
     const { player, opponent } = props
@@ -37,6 +37,12 @@ function App(props) {
         } 
     }
 
+    const handlePlaceShipsRandomly = () => {
+        const { ships, board } = player.gameboard
+        const updatedBoard = player.placeShipsRandomly(ships, board)
+        setPlayerBoard([...updatedBoard])
+    }
+
     return (
         <div style={{ textAlign: "center" }}>
             <h1>BATTLESHIP!</h1>
@@ -44,9 +50,7 @@ function App(props) {
                 <Board whoseBoard="Player" gameboard={ playerBoard } handleCellClick={ handleCellClick } />
                 <Board whoseBoard="Opponent" gameboard={ opponentBoard } handleCellClick={ handleCellClick } />
             </div>
-            {
-            // <PlayerDisplay />
-            }
+            <PlayerDisplay handlePlaceShipsRandomly={ handlePlaceShipsRandomly } />
         </div>
     )
 }
