@@ -28,7 +28,6 @@ function App(props) {
     }
 
     const handleCellClick = (position, whoseBoard) => {
-        console.log(position)
         if (whoseBoard !== "Opponent" || playerTurn !== "Player") return
         const isValidPlay = playerAttack(position)   
         if (isValidPlay) {
