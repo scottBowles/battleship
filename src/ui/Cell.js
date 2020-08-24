@@ -2,16 +2,21 @@ import React, { useState } from 'react'
 import style from "./Cell.css"
 
 function Cell (props) {
-    const { value, whoseBoard, position, handleCellClick } = props
+    const { index, value, whoseBoard, position, handleCellClick, handleDrop } = props
+    
+    function handleDragover(ev) {
+        ev.preventDefault();
+        ev.dataTransfer.dropEffect = "move";
+    }
 
     return (
-        <div onClick={() => handleCellClick(position, whoseBoard)} style={ getCellStyle(value, whoseBoard) }>
-            <span className="overlay"></span>
+        <div id="grid" onDrop={ handleDrop } onDragOver={ handleDragover} onClick={() => handleCellClick(position, whoseBoard)} style={ getCellStyle(value, whoseBoard) }>
+            <span data-index={ index } className="overlay"></span>
         </div>
     )
 }
 
-const getCellStyle = (cell, whoseBoard) => {
+const getCellStyle = (cellValue, whoseBoard) => {
     const getColor = (cellValue, whoseBoard) => {
         if (whoseBoard === "Player") {
             switch (cellValue) {
@@ -55,11 +60,12 @@ const getCellStyle = (cell, whoseBoard) => {
             }
         }
     }
-    const color = getColor(cell, whoseBoard)
+    const color = getColor(cellValue, whoseBoard)
     return {
         border: "1px black solid",
         backgroundColor: color
     }
 }
+
 
 export default Cell

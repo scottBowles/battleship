@@ -1,22 +1,26 @@
 import React from 'react'
 import Cell from './Cell'
 
+
 function Board(props) {
-    const { whoseBoard, name, gameboard, handleCellClick } = props
-    const cells = gameboard.map((cell, index) => (
+    const { whoseBoard, player, board, handleCellClick, handleDrop } = props
+    
+    const cells = board.map((cell, index) => (
         <Cell 
+            index={ index }
             value={ cell } 
             whoseBoard={ whoseBoard } 
             position={ index }
             handleCellClick={ handleCellClick }
             key={ index } 
+            handleDrop={ handleDrop }
         >
         </Cell>
     ))
-    
+
     return (
         <div>
-            <h3>{ name }'s Board</h3>
+            <h3>{ player.name }'s Board</h3>
             <div style={ gridStyle }>
                 { cells }
             </div>

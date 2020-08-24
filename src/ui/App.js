@@ -5,6 +5,7 @@ import PlayerDisplay from './PlayerDisplay'
 
 import Player from "../models/Player"
 import cpuFactory from "../models/CPU"
+import { placeShipsRandomly, getPositionsArray, isValidStartingPosition, isAvailableSpace } from '../models/shipFns';
 
 function App() {
     const [player, setPlayer] = useState(Player("Player"))
@@ -12,7 +13,7 @@ function App() {
     const [playerBoard, setPlayerBoard] = useState(player.gameboard.board)
     const [opponentBoard, setOpponentBoard] = useState(opponent.gameboard.board)
     const [phase, setPhase] = useState("setup")
-    const [winningPlayer, setWinningPlayer] = useState()
+    const [winningPlayer, setWinningPlayer] = useState() 
 
     const playerAttack = (position) => {
         const playerAttackResult = opponent.receiveAttack(position)
@@ -53,9 +54,8 @@ function App() {
     }
 
     const handlePlaceShipsRandomly = () => {
-        const { ships, board } = player.gameboard
-        console.log({ships, board})
-        const updatedBoard = player.placeShipsRandomly(ships, board)
+        const { ships } = player.gameboard
+        const updatedBoard = placeShipsRandomly(ships, player)
         setPlayerBoard([...updatedBoard])
     }
 
@@ -74,14 +74,36 @@ function App() {
         setOpponentBoard([...newOpponent.gameboard.board])
     }
 
+    const dragStart = (ev) => {
+        ev.dataTransfer.setData("text/plain", ev.target.dataset.name)
+        ev.dataTransfer.dropEffect = "move";
+    }
+
+    function handleDrop(event) {
+        event.preventDefault();
+        
+        const index = event.target.dataset.index
+        const shipName = event.dataTransfer.getData("text/plain");
+        const ship = player.gameboard.ships.find(ship => ship.name === shipName)
+        const positions = getPositionsArray(index, ship.length, "horizontal")
+        if (!isValidStartingPosition(index, ship.length, "horizontal", player.gameboard.board) || !isAvailableSpace(playerBoard, positions)) {
+            return
+        }
+        player.placeShip(shipName, positions)
+        setPlayerBoard([...player.gameboard.board])
+    }
+
     return (
         <div style={{ textAlign: "center" }}>
             <h1>BATTLESHIP!</h1>
-            <div style={{ display: "flex", justifyContent: "space-around" }}>
-                <Board whoseBoard="Player" name={ player.name } gameboard={ playerBoard } handleCellClick={ handleCellClick } />
-                <Board whoseBoard="Opponent" name={ opponent.name } gameboard={ opponentBoard } handleCellClick={ handleCellClick } />
-            </div>
             <PlayerDisplay phase={ phase } winningPlayer={ winningPlayer } handlePlaceShipsRandomly={ handlePlaceShipsRandomly } startGame={ startGame } newGame={ newGame } player={ player } opponent={ opponent }/>
+            <div style={{ display: "flex", justifyContent: "space-around", flexWrap: "wrap-reverse" }}>
+                <Board player={ player } whoseBoard="Player" name={ player.name } board={ playerBoard } handleCellClick={ handleCellClick } handleDrop = { handleDrop } />
+                <Board player={ opponent } whoseBoard="Opponent" name={ opponent.name } board={ opponentBoard } handleCellClick={ handleCellClick } />
+            </div>
+            <div>
+                <div onDragStart={ dragStart } draggable data-name="Carrier" style={{height: "30px", width: "120px", backgroundColor: "pink"}}></div>
+            </div>
         </div>
     )
 }

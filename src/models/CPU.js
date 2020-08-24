@@ -1,12 +1,13 @@
 import playerFactory from "./Player"
 import config from "./config"
 import stdGameboardFactory from "./StdGameboard"
+import { placeShipsRandomly } from "./shipFns"
 
-function cpuFactory(name="CPU", newGameboard=stdGameboardFactory) {
+function cpuFactory(name="Computer", newGameboard=stdGameboardFactory) {
     const cpu = playerFactory(name, newGameboard)
     const { board, ships } = cpu.gameboard
 
-    cpu.placeShipsRandomly(ships, board)
+    placeShipsRandomly(ships, cpu)
 
     const opponentBoard = new Array(100).fill(null)
 
