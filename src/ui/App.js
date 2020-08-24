@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Board from './Board'
 import PlayerDisplay from './PlayerDisplay'
+import DraggableShips from './DraggableShips'
 
 import Player from "../models/Player"
 import cpuFactory from "../models/CPU"
@@ -101,9 +102,7 @@ function App() {
                 <Board player={ player } whoseBoard="Player" name={ player.name } board={ playerBoard } handleCellClick={ handleCellClick } handleDrop = { handleDrop } />
                 <Board player={ opponent } whoseBoard="Opponent" name={ opponent.name } board={ opponentBoard } handleCellClick={ handleCellClick } />
             </div>
-            <div>
-                <div onDragStart={ dragStart } draggable data-name="Carrier" style={{height: "30px", width: "120px", backgroundColor: "pink"}}></div>
-            </div>
+            <DraggableShips dragStart={ dragStart } />
         </div>
     )
 }
