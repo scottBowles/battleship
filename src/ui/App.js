@@ -102,7 +102,7 @@ function App() {
                 <Board player={ player } whoseBoard="Player" name={ player.name } board={ playerBoard } handleCellClick={ handleCellClick } handleDrop = { handleDrop } />
                 <Board player={ opponent } whoseBoard="Opponent" name={ opponent.name } board={ opponentBoard } handleCellClick={ handleCellClick } />
             </div>
-            <DraggableShips dragStart={ dragStart } />
+            <DraggableShips ships={ player.gameboard.ships } dragStart={ dragStart } />
         </div>
     )
 }
