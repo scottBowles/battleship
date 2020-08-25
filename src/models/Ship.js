@@ -3,6 +3,7 @@ function shipFactory(length, name, color, direction="horizontal") {
         length,
         name,
         color,
+        direction,
         unHitPips: length,
     }
     
@@ -12,6 +13,13 @@ function shipFactory(length, name, color, direction="horizontal") {
     }
 
     ship.isSunk = () => ship.unHitPips < 1
+
+    ship.toggleDirection = () => {
+        ship.direction = 
+            ship.direction === "horizontal" 
+            ? "vertical" 
+            : "horizontal"
+    }
 
     return ship
 }
