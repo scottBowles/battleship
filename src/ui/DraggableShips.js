@@ -1,10 +1,11 @@
 import React from 'react'
 
 function DraggableShips(props) {
-    const { ships, dragStart } = props
+    const { ships, dragStart, toggleShipDirection } = props
+
     return(
         <div>
-            <div style={{ display: "flex", marginLeft: "20px" }}>Drag in place. Right click ship below to change direction.</div>
+            <div style={{ display: "flex", marginLeft: "20px" }}>Drag in place. Click ship below to change direction.</div>
             <div style={{ display: "flex" }}>
                 { ships.map(ship => (
                     <div key={ ship.name } style={{ height: `${ship.length * 40}px`, width: `${ship.length * 40}px`, margin: "10px" }}>
@@ -13,7 +14,9 @@ function DraggableShips(props) {
                             onDragStart={ props.dragStart } 
                             draggable 
                             data-name={ship.name} 
+                            data-ship={JSON.stringify(ship)}
                             style={ shipStyles(ship) }
+                            onClick={ toggleShipDirection }
                         >
                         </div>
                     </div>
@@ -24,9 +27,10 @@ function DraggableShips(props) {
 }
 
 function shipStyles(ship) {
+    const { direction } = ship
     return {
-            height: "40px", 
-            width: `${ship.length * 40}px`, 
+            height: direction === "vertical" ? `${ship.length * 40}px` : "40px", 
+            width: direction === "horizontal" ? `${ship.length * 40}px` : "40px", 
             margin: "5px", 
             backgroundColor: ship.color
     }

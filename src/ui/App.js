@@ -94,6 +94,13 @@ function App() {
         setPlayerBoard([...player.gameboard.board])
     }
 
+    function toggleShipDirection(event) {
+        const shipName = event.target.dataset.name
+        const ship = player.gameboard.ships.find(ship => ship.name === shipName)
+        ship.toggleDirection()
+        setPlayerBoard([...player.gameboard.board])
+    }
+
     return (
         <div style={{ textAlign: "center" }}>
             <h1>BATTLESHIP!</h1>
@@ -102,7 +109,7 @@ function App() {
                 <Board player={ player } whoseBoard="Player" board={ playerBoard } handleCellClick={ handleCellClick } handleDrop = { handleDrop } />
                 <Board player={ opponent } whoseBoard="Opponent" board={ opponentBoard } handleCellClick={ handleCellClick } />
             </div>
-            { phase === "setup" && <DraggableShips ships={ player.gameboard.ships } dragStart={ dragStart } /> }
+            { phase === "setup" && <DraggableShips ships={ player.gameboard.ships } dragStart={ dragStart } toggleShipDirection={ toggleShipDirection } /> }
         </div>
     )
 }
