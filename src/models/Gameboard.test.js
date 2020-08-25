@@ -40,8 +40,8 @@ test("Receive attack (miss)!", () => {
 
 test("Receive hit", () => {
     const gameboard = gameboardFactory()
-    const ship = gameboard.addShip(4, "Battleship")
-    const board = gameboard.placeShip(ship.name, [0, 1, 2, 3])
+    const ship = gameboard.addShip(4, "Battleship", "red")
+    const board = gameboard.placeShip(ship, [0, 1, 2, 3])
     const updatedBoard = gameboard.receiveAttack(3)
     expect(updatedBoard[3]).toBe("hit")
 })
@@ -55,7 +55,7 @@ test("Attack in position already attacked", () => {
 test("allSunk -- true", () => {
     const gameboard = gameboardFactory()
     const ship = gameboard.addShip(2, "Destroyer")
-    const board = gameboard.placeShip(ship.name, [33, 34])
+    const board = gameboard.placeShip(ship, [33, 34])
     const updatedBoard1 = gameboard.receiveAttack(33)
     const updatedBoard2 = gameboard.receiveAttack(34)
     expect(gameboard.allSunk()).toBe(true)
@@ -64,7 +64,7 @@ test("allSunk -- true", () => {
 test("allSunk -- false", () => {
     const gameboard = gameboardFactory()
     const ship = gameboard.addShip(2, "Destroyer")
-    const board = gameboard.placeShip(ship.name, [33, 34])
+    const board = gameboard.placeShip(ship, [33, 34])
     const updatedBoard1 = gameboard.receiveAttack(33)
     expect(gameboard.allSunk()).toBe(false)
 })
