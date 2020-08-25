@@ -90,7 +90,7 @@ function App() {
         if (!isValidStartingPosition(index, ship.length, "horizontal", player.gameboard.board) || !isAvailableSpace(playerBoard, positions)) {
             return
         }
-        player.placeShip(shipName, positions)
+        player.placeShip(ship, positions)
         setPlayerBoard([...player.gameboard.board])
     }
 
@@ -99,10 +99,10 @@ function App() {
             <h1>BATTLESHIP!</h1>
             <PlayerDisplay phase={ phase } winningPlayer={ winningPlayer } handlePlaceShipsRandomly={ handlePlaceShipsRandomly } startGame={ startGame } newGame={ newGame } player={ player } opponent={ opponent }/>
             <div style={{ display: "flex", justifyContent: "space-around", flexWrap: "wrap-reverse" }}>
-                <Board player={ player } whoseBoard="Player" name={ player.name } board={ playerBoard } handleCellClick={ handleCellClick } handleDrop = { handleDrop } />
-                <Board player={ opponent } whoseBoard="Opponent" name={ opponent.name } board={ opponentBoard } handleCellClick={ handleCellClick } />
+                <Board player={ player } whoseBoard="Player" board={ playerBoard } handleCellClick={ handleCellClick } handleDrop = { handleDrop } />
+                <Board player={ opponent } whoseBoard="Opponent" board={ opponentBoard } handleCellClick={ handleCellClick } />
             </div>
-            <DraggableShips ships={ player.gameboard.ships } dragStart={ dragStart } />
+            { phase === "setup" && <DraggableShips ships={ player.gameboard.ships } dragStart={ dragStart } /> }
         </div>
     )
 }

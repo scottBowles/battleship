@@ -40,9 +40,9 @@ const getValidPositions = (length, board) => {
 const placeShipsRandomly = (ships, player) => {
     const { board, placeShip } = player.gameboard
     ships.forEach(ship => {
-        const { length, name } = ship
+        const { length } = ship
         const positions = getValidPositions(length, board)
-        placeShip(name, positions)
+        placeShip(ship, positions)
     })
     return board
 }

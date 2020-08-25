@@ -1,4 +1,4 @@
-function shipFactory(length, name) {
+function shipFactory(length, name, color) {
     let unHitPips = length
     const hit = () => {
         unHitPips -= 1
@@ -8,6 +8,7 @@ function shipFactory(length, name) {
     return {
         length,
         name,
+        color,
         hit,
         isSunk
     }

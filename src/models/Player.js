@@ -10,14 +10,11 @@ function playerFactory(name, newGameboard=config.newGameboard) {
     
     return {
         name,
+        changeName,
         receiveAttack,
         allSunk,
         placeShip,
         resetGameboard,
-        // isValidStartingPosition,
-        // getValidStartingPosition,
-        // getValidPositions,
-        // placeShipsRandomly,
         gameboard
     }
 }

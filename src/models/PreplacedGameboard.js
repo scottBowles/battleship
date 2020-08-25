@@ -1,13 +1,14 @@
 import stdGameboardFactory from "./StdGameboard"
 
 function preplacedGameboardFactory() {
-    const board = stdGameboardFactory()
-    board.placeShip("Carrier", [0, 1, 2, 3, 4])
-    board.placeShip("Battleship", [21, 31, 41, 51])
-    board.placeShip("Cruiser", [85, 86, 87])
-    board.placeShip("Submarine", [44, 54, 64])
-    board.placeShip("Destroyer", [90, 91])
-    return board
+    const gameboard = stdGameboardFactory()
+    const [ carrier, battleship, cruiser, submarine, destroyer ] = gameboard.ships
+    gameboard.placeShip(carrier, [0, 1, 2, 3, 4])
+    gameboard.placeShip(battleship, [21, 31, 41, 51])
+    gameboard.placeShip(cruiser, [85, 86, 87])
+    gameboard.placeShip(submarine, [44, 54, 64])
+    gameboard.placeShip(destroyer, [90, 91])
+    return gameboard
 }
 
 export default preplacedGameboardFactory

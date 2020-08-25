@@ -3,7 +3,7 @@ import style from "./Cell.css"
 
 function Cell (props) {
     const { index, value, whoseBoard, position, handleCellClick, handleDrop } = props
-    
+    console.log({index, color: (value ? value.color : undefined) })
     function handleDragover(ev) {
         ev.preventDefault();
         ev.dataTransfer.dropEffect = "move";
@@ -20,20 +20,8 @@ const getCellStyle = (cellValue, whoseBoard) => {
     const getColor = (cellValue, whoseBoard) => {
         if (whoseBoard === "Player") {
             switch (cellValue) {
-                case "Carrier":
-                    return "yellow"
-                    break
-                case "Battleship":
-                    return "green"
-                    break
-                case "Cruiser":
-                    return "orange"
-                    break
-                case "Submarine":
-                    return "blue"
-                    break
-                case "Destroyer":
-                    return "purple"
+                case null:
+                    return "white"
                     break
                 case "hit":
                     return "red"
@@ -42,8 +30,7 @@ const getCellStyle = (cellValue, whoseBoard) => {
                     return "rgba(0, 0, 0, .35)"
                     break
                 default:
-                    return "white"
-                    break
+                    return cellValue.color
             }
         }
         if (whoseBoard === "Opponent") {
