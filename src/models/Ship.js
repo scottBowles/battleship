@@ -3,11 +3,8 @@ function shipFactory(length, name, color, direction="horizontal") {
         length,
         name,
         color,
-        direction,
         unHitPips: length,
     }
-
-    ship.changeDirection = (newDirection) => ship.direction = newDirection
     
     ship.hit = () => {
         ship.unHitPips -= 1

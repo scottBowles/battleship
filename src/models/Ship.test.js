@@ -36,19 +36,3 @@ test("With a name", () => {
     const ship = shipFactory(3, "Battleship")
     expect(ship.name).toBe("Battleship")
 })
-
-test("Set direction with default", () => {
-    const ship = shipFactory(3, "test", "red")
-    expect(ship.direction).toBe("horizontal")
-})
-
-test("Set direction explicitly", () => {
-    const ship = shipFactory(3, "test", "red", "vertical")
-    expect(ship.direction).toBe("vertical")
-})
-
-test("Change direction", () => {
-    const ship = shipFactory(3, "test", "red")
-    ship.changeDirection("vertical")
-    expect(ship.direction).toBe("vertical")
-})
