@@ -96,6 +96,7 @@ function App() {
 
     function toggleShipDirection(event) {
         const shipName = event.target.dataset.name
+        console.log(event.target)
         const ship = player.gameboard.ships.find(ship => ship.name === shipName)
         ship.toggleDirection()
         setPlayerBoard([...player.gameboard.board])
