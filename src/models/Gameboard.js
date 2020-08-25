@@ -16,15 +16,14 @@ function gameboardFactory() {
         return board
     }
     const receiveAttack = (position) => {
-        const value = board[position]
-        if (["miss", "hit"].includes(value)) {
+        const hitResult = board[position]
+        if (["miss", "hit"].includes(hitResult)) {
             return "Position already attacked"
         }
-        if (value !== null) {
-            const hitShip = ships.find(ship => ship.name === value)
-            hitShip.hit()
+        if (hitResult !== null) {
+            hitResult.hit()
         }
-        board[position] = value === null ? "miss" : "hit"
+        board[position] = hitResult === null ? "miss" : "hit"
         return board
     }
     const allSunk = () => ships.reduce((acc, cur) => acc && cur.isSunk(), true)

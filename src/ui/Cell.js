@@ -3,7 +3,6 @@ import style from "./Cell.css"
 
 function Cell (props) {
     const { index, value, whoseBoard, position, handleCellClick, handleDrop } = props
-    console.log({index, color: (value ? value.color : undefined) })
     function handleDragover(ev) {
         ev.preventDefault();
         ev.dataTransfer.dropEffect = "move";
@@ -27,7 +26,7 @@ const getCellStyle = (cellValue, whoseBoard) => {
                     return "red"
                     break
                 case "miss":
-                    return "rgba(0, 0, 0, .35)"
+                    return "#006994"
                     break
                 default:
                     return cellValue.color
@@ -39,7 +38,7 @@ const getCellStyle = (cellValue, whoseBoard) => {
                     return "red"
                     break
                 case "miss":
-                    return "rgba(0, 0, 0, .35)"
+                    return "#006994"
                     break
                 default:
                     return "white"
