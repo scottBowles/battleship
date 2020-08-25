@@ -86,8 +86,8 @@ function App() {
         const index = event.target.dataset.index
         const shipName = event.dataTransfer.getData("text/plain");
         const ship = player.gameboard.ships.find(ship => ship.name === shipName)
-        const positions = getPositionsArray(index, ship.length, "horizontal")
-        if (!isValidStartingPosition(index, ship.length, "horizontal", player.gameboard.board) || !isAvailableSpace(playerBoard, positions)) {
+        const positions = getPositionsArray(index, ship.length, ship.direction)
+        if (!isValidStartingPosition(index, ship.length, ship.direction, player.gameboard.board) || !isAvailableSpace(playerBoard, positions)) {
             return
         }
         player.placeShip(ship, positions)
